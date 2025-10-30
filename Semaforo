@@ -1,31 +1,37 @@
-int pinROJO=8;
-int pinAMARILLO=4;
-int pinVERDE=1;
+int pinROJO = 8;
+int pinAMARILLO = 4;
+int pinVERDE = 10;
+int pinPULSADOR = 2;
 
-void setup()
-{
-
+void setup() {
+  pinMode(pinROJO, OUTPUT);
+  pinMode(pinAMARILLO, OUTPUT);
+  pinMode(pinVERDE, OUTPUT);
+  pinMode(pinPULSADOR, INPUT);
 }
 
+void loop() {
+  int estadoBoton = digitalRead(pinPULSADOR);
 
-void loop()
-{
-
-
-    pinMode(pinVERDE,OUTPUT);
-    digitalWrite(pinVERDE,HIGH);
+  if (estadoBoton == LOW) {
+    digitalWrite(pinVERDE, HIGH);
     delay(4000);
-    pinMode(pinVERDE,OUTPUT);
-    digitalWrite(pinVERDE,LOW);
-    pinMode(pinAMARILLO,OUTPUT);
-    digitalWrite(pinAMARILLO,HIGH);
-    delay(2000);
-    pinMode(pinAMARILLO,OUTPUT);
-    digitalWrite(pinAMARILLO,LOW);
-    pinMode(pinROJO,OUTPUT);
-    digitalWrite(pinROJO,HIGH);
-    delay(6000);
-    pinMode(pinROJO,OUTPUT);
-    digitalWrite(pinROJO,LOW);
+    digitalWrite(pinVERDE, LOW);
 
+    digitalWrite(pinAMARILLO, HIGH);
+    delay(2000);
+    digitalWrite(pinAMARILLO, LOW);
+
+    digitalWrite(pinROJO, HIGH);
+    delay(6000);
+    digitalWrite(pinROJO, LOW);
+  }
+
+  else if (estadoBoton == HIGH) {
+    digitalWrite(pinVERDE, LOW);
+    digitalWrite(pinAMARILLO, LOW);
+    digitalWrite(pinROJO, HIGH);
+    delay(10000); // tiempo para cruce de peatón
+    digitalWrite(pinROJO, LOW);
+  }
 }
