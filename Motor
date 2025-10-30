@@ -1,0 +1,27 @@
+const int pinMotor = 9;   // Pin PWM al TIP120
+const int pinPot = A0;    // Pin del potenciómetro
+
+int valorPot = 0;         // Valor leído del potenciómetro
+int velocidad = 0;        // Valor PWM (0–255)
+
+void setup() {
+  pinMode(pinMotor, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  valorPot = analogRead(pinPot);
+
+  // Convertir rango 0–1023 a 0–255 (PWM)
+  velocidad = map(valorPot, 0, 1023, 0, 255);
+
+  analogWrite(pinMotor, velocidad);
+
+  Serial.print("Potenciometro: ");
+  Serial.print(valorPot);
+  Serial.print(" | PWM: ");
+  Serial.println(velocidad);
+
+  delay(100);
+}
